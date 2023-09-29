@@ -1,0 +1,12 @@
+//libs
+@import './customBS';
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+//modules
+@import './userTable';
+@import './header';
+body{
+    width: 100%
+}
+#root{
+    max-width: 100%;
+}

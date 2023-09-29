@@ -1,0 +1,41 @@
+@import './customBS';
+#root{
+    width: 80%;
+    margin: 0 auto;
+}
+.usersTable{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0 auto;
+    column-gap: 5px;
+    border: solid map-get($theme-colors, "dark") 1px;
+    word-wrap: break-word;
+    text-align: center;
+    &__header{
+        padding: 0.2em 0.3em;
+        font-weight: 600;
+    }
+    &__row_header{
+        text-align: left;
+    }
+    &__row{
+        display: grid;
+        grid-template-columns: minmax(4%,10%) repeat(6, minmax(12%,50%));
+    }
+    &__row:nth-child(even){
+        background-color: tint-color(map-get($theme-colors, "dark"), 40%);
+    }
+
+    &__item{
+        text-align: left;
+        padding: 1em 0.5em;
+        .btn{
+            color: black;
+            text-transform: uppercase;
+        }
+    }
+    &__item:first-child{
+        text-align: center;
+    }
+
+}
