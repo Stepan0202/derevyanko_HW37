@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/esm/Modal';
 import Button from 'react-bootstrap/esm/Button';
-function ModalDeleting({show, setShow, handleClose, handleShow, setConfirmDeleting}) {
+function ModalDeleting({show, handleClose, setConfirmDeleting}) {
     function handleConfirmDeleting(){
       setConfirmDeleting(true);
       handleClose();

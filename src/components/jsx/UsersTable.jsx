@@ -31,7 +31,7 @@ function UsersTable({users, setUsers}){
 
     return (
       <>
-        <ModalDeleting setConfirmDeleting={setConfirmDeleting} show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow}/>
+        <ModalDeleting setConfirmDeleting={setConfirmDeleting} show={show} handleClose={handleClose}/>
         <div className="usersTable">
             <div className="usersTable__row usersTable__row_header">
                 <div className="usersTable__header">ID</div>
