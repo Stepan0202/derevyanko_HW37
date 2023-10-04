@@ -1,13 +1,3 @@
-/*Створити просту телефонну книгу.
-
-Реалізувати перемикання між сторінками за допомогою react-router
-Додати сторінку редагування запису
-Додати підтвердження видалення запису (у вигляді модального вікна)
-
-
-*/
-
-import { useState} from 'react'
 import './components/sass/app.scss'
 import Root from './routes/root'
 import UsersTable from './components/jsx/UsersTable'

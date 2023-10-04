@@ -9,7 +9,6 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type){
         case 'setUsers':
-
             return{
                 users: action.payload
             }

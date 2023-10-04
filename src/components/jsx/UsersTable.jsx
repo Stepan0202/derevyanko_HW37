@@ -1,10 +1,10 @@
-
 import Button from 'react-bootstrap/esm/Button';
 import ModalDeleting from './ModalDeleting';
 import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+
 function UsersTable(){
     const [show, setShow] = useState(false);
     const [confirmDeleting, setConfirmDeleting] = useState(false)
