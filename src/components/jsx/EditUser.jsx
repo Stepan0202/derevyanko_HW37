@@ -4,8 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
 
-function EditUser({users, setUsers}){
+function EditUser(){
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
   if (users.length === 0) return <div>Loading...</div>;
   
   let userID = useParams();
@@ -15,11 +19,11 @@ function EditUser({users, setUsers}){
   const userIndex = getIndexbyID(lcUsers, userID);
   const currentUser = lcUsers[userIndex];
 
-  const [userName, setUserName] = useState(currentUser.name);
-  const [userUsername, setUserUsername] = useState(currentUser.username);
-  const [userEmail, setUserEmail] = useState(currentUser.email);
-  const [userPhone, setUserPhone] = useState(currentUser.phone);
-  const [userWebsite, setUserWebsite] = useState(currentUser.website);
+  const [userName, setUserName]  = useState(currentUser.name);
+  const [userUsername, setUserUsername]  = useState(currentUser.username);
+  const [userEmail, setUserEmail]  = useState(currentUser.email);
+  const [userPhone, setUserPhone]  = useState(currentUser.phone);
+  const [userWebsite, setUserWebsite]  = useState(currentUser.website);
   
   function processAddUserForm(e){
       e.preventDefault();
@@ -29,7 +33,10 @@ function EditUser({users, setUsers}){
       });
       
         localStorage.setItem('users', JSON.stringify(lcUsers));
-        setUsers(lcUsers);
+        dispatch({
+          type: "setUsers",
+          payload: lcUsers
+        })
         navigate("/")
     }
     function getIndexbyID(array, ID){

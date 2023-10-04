@@ -8,7 +8,8 @@ async function fetchUsers(setUsers){
 
       }
       const storedData = JSON.parse(localStorage.getItem('users'));
-      setUsers(storedData);
+      return storedData
+      // setUsers(storedData);
     }
     catch(error){
       console.error('Error fetching data:', error);

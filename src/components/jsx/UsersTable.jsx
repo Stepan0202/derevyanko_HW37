@@ -3,14 +3,17 @@ import Button from 'react-bootstrap/esm/Button';
 import ModalDeleting from './ModalDeleting';
 import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-
-function UsersTable({users, setUsers}){
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
+function UsersTable(){
     const [show, setShow] = useState(false);
     const [confirmDeleting, setConfirmDeleting] = useState(false)
     const [userID, setUserID] = useState(0);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+    const users = useSelector(state => state.users)
+    const dispatch =  useDispatch();
+
     function handleDeleting(e){
       handleShow();
       setUserID(e.target.dataset.userid)
@@ -21,7 +24,11 @@ function UsersTable({users, setUsers}){
     function deleteUser(){
       if(confirmDeleting){
         const newTable = users.filter(user => user.id != userID);
-        setUsers(newTable);
+        dispatch({
+          type: "setUsers",
+          payload: newTable,
+
+        });
         localStorage.setItem('users', JSON.stringify(newTable));
         setConfirmDeleting(false);
       }
@@ -46,7 +53,7 @@ function UsersTable({users, setUsers}){
             <div className="usersTable__row" key={user.id}>
                 <div className="usersTable__item key">{user.id ? user.id : "—"}</div>
                 <div className="usersTable__item name">{user.name ? user.name : "—"}</div>
-                <div className="usersTable__item username">{user.name ? user.username : "—"}</div>
+                <div className="usersTable__item username">{user.username ? user.username : "—"}</div>
                 <div className="usersTable__item email">{user.email ? user.email : "—"}</div>
                 <div className="usersTable__item phone">{user.phone ? user.phone : "—"}</div>
                 <div className="usersTable__item website">{user.website ? user.website : "—"}</div>

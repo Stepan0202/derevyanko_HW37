@@ -3,9 +3,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector} from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
 
-function AddUser({users, setUsers}){
+function AddUser(){
   const navigate = useNavigate()
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
 
   if (users.length === 0) {
     return <div>Loading...</div>;
@@ -16,12 +20,16 @@ function AddUser({users, setUsers}){
       const newUser = {};
       fields.forEach(field => {
         newUser[field.name] = field.value;
+        console.log(field.name + " " + field.value)
       });
       const lcUsers = JSON.parse(localStorage['users']);
       if(lcUsers){
         lcUsers.push(newUser);
         localStorage.setItem('users', JSON.stringify(lcUsers));
-        setUsers(lcUsers);
+        dispatch({
+          type: "setUsers",
+          payload: lcUsers,
+        })
       }
       
       navigate("/")
