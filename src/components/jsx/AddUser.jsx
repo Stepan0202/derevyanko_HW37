@@ -5,10 +5,11 @@ import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector} from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+import { usersActions } from '../js/usersSlice';
 
 function AddUser(){
   const navigate = useNavigate()
-  const users = useSelector(state => state.users);
+  const users = useSelector(state => state.users.users);
   const dispatch = useDispatch();
 
   if (users.length === 0) {
@@ -26,10 +27,7 @@ function AddUser(){
       if(lcUsers){
         lcUsers.push(newUser);
         localStorage.setItem('users', JSON.stringify(lcUsers));
-        dispatch({
-          type: "setUsers",
-          payload: lcUsers,
-        })
+        dispatch(usersActions.setUsers(lcUsers));
       }
       
       navigate("/")

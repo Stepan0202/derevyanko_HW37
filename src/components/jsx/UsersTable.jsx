@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+import { usersActions } from '../js/usersSlice';
 
 function UsersTable(){
     const [show, setShow] = useState(false);
@@ -11,9 +12,9 @@ function UsersTable(){
     const [userID, setUserID] = useState(0);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const users = useSelector(state => state.users)
+    const users = useSelector(state => state.users.users)
     const dispatch =  useDispatch();
-
+    console.log(users)
     function handleDeleting(e){
       handleShow();
       setUserID(e.target.dataset.userid)
@@ -24,11 +25,7 @@ function UsersTable(){
     function deleteUser(){
       if(confirmDeleting){
         const newTable = users.filter(user => user.id != userID);
-        dispatch({
-          type: "setUsers",
-          payload: newTable,
-
-        });
+        dispatch(usersActions.setUsers(newTable));
         localStorage.setItem('users', JSON.stringify(newTable));
         setConfirmDeleting(false);
       }

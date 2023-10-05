@@ -6,9 +6,10 @@ import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+import { usersActions } from '../js/usersSlice';
 
 function EditUser(){
-  const users = useSelector(state => state.users);
+  const users = useSelector(state => state.users.users);
   const dispatch = useDispatch();
   if (users.length === 0) return <div>Loading...</div>;
   
@@ -33,10 +34,7 @@ function EditUser(){
       });
       
         localStorage.setItem('users', JSON.stringify(lcUsers));
-        dispatch({
-          type: "setUsers",
-          payload: lcUsers
-        })
+        dispatch(usersActions.setUsers(lcUsers))
         navigate("/")
     }
     function getIndexbyID(array, ID){
