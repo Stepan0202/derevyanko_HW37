@@ -1,9 +1,9 @@
-import {createStore} from 'redux';
+import{configureStore} from '@reduxjs/toolkit' 
 import fetchUsers from '../js/fetchData'
 
 const users = await fetchUsers();
 const initialState = {
-    users: users,
+    users: users, 
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -15,6 +15,8 @@ const usersReducer = (state = initialState, action) => {
     }
     return state;
 }
-const store = createStore(usersReducer)
+const store = configureStore({
+    reducer: usersReducer
+})
 
 export default store; 
